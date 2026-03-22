@@ -36,7 +36,7 @@ Visualization	Plotly.js
 UI	Custom CSS + JavaScript
 ⚙️ Installation & Setup
 1. Clone Repository
-git clone https://github.com/your-username/csv-analyzer.git
+git clone https://github.com/anshikasinghhh/CSV-analyzer-webapp.git
 cd csv-analyzer
 2. Create Virtual Environment
 python -m venv venv
