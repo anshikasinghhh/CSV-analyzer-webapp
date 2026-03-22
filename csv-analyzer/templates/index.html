@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Analyzer Dashboard</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1><i class="fas fa-chart-line"></i> CSV Analyzer</h1>
+            <nav>
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                    {% if session.uploaded %}
+                    <li><a href="/data"><i class="fas fa-table"></i> Data</a></li>
+                    <li><a href="/visualize"><i class="fas fa-chart-bar"></i> Visualize</a></li>
+                    <li><a href="/predict"><i class="fas fa-brain"></i> Predict</a></li>
+                    <li><a href="/download"><i class="fas fa-download"></i> Download</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="card">
+            <h2><i class="fas fa-upload"></i> Upload Your CSV File</h2>
+            <div class="upload-section">
+                <p>Upload a CSV file to analyze your data, create visualizations, and make predictions.</p>
+                <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <div class="file-input-wrapper">
+                        <input type="file" name="file" accept=".csv" id="file-input" required>
+                        <label for="file-input" class="file-input-label">
+                            <i class="fas fa-file-csv"></i> Choose CSV File
+                        </label>
+                    </div>
+                    <div id="file-name" style="margin-bottom: 1rem; font-weight: 500; color: var(--primary-color);"></div>
+                    <button type="submit" class="btn">
+                        <i class="fas fa-upload"></i> Upload & Analyze
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        {% if session.uploaded %}
+        <div class="card">
+            <h2><i class="fas fa-tachometer-alt"></i> Quick Actions</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <i class="fas fa-table fa-2x" style="color: var(--accent-color);"></i>
+                    <h3>Data</h3>
+                    <p>View and analyze your dataset</p>
+                    <a href="/data" class="btn">View Data</a>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-chart-bar fa-2x" style="color: var(--accent-color);"></i>
+                    <h3>Visualize</h3>
+                    <p>Create charts and graphs</p>
+                    <a href="/visualize" class="btn">Visualize Data</a>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-brain fa-2x" style="color: var(--accent-color);"></i>
+                    <h3>Predict</h3>
+                    <p>Make machine learning predictions</p>
+                    <a href="/predict" class="btn">Start Predicting</a>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-download fa-2x" style="color: var(--accent-color);"></i>
+                    <h3>Download</h3>
+                    <p>Get your analysis results</p>
+                    <a href="/download" class="btn btn-secondary">Download Results</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+
+    <footer class="footer">
+        <div class="dashboard-container">
+            <p>&copy; 2024 CSV Analyzer Dashboard. Built with Flask and modern web technologies.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('file-input').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || '';
+            const fileNameDiv = document.getElementById('file-name');
+            if (fileName) {
+                fileNameDiv.textContent = `Selected file: ${fileName}`;
+            } else {
+                fileNameDiv.textContent = '';
+            }
+        });
+    </script>
+</body>
+</html>

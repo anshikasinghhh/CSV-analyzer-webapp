@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict - CSV Analyzer</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1><i class="fas fa-chart-line"></i> CSV Analyzer</h1>
+            <nav>
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="/data"><i class="fas fa-table"></i> Data</a></li>
+                    <li><a href="/visualize"><i class="fas fa-chart-bar"></i> Visualize</a></li>
+                    <li><a href="/predict" class="active"><i class="fas fa-brain"></i> Predict</a></li>
+                    <li><a href="/download"><i class="fas fa-download"></i> Download</a></li>
+                </ul>
+            </nav>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="card">
+            <h2><i class="fas fa-brain"></i> Machine Learning Predictions</h2>
+            <p>Configure your prediction model by selecting a target column and the features to use for training.</p>
+
+            <form action="/predict" method="POST">
+                <div class="form-group">
+                    <label for="target"><i class="fas fa-target"></i> Target Column (What to predict):</label>
+                    <select name="target" id="target" class="form-control" required>
+                        <option value="">Select target column...</option>
+                        {% for col in columns %}
+                        <option value="{{ col }}">{{ col }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-cogs"></i> Feature Columns (Input variables):</label>
+                    <p class="form-help">Select the columns that will be used to make predictions.</p>
+                    <div class="checkbox-group">
+                        {% for col in columns %}
+                        <div class="checkbox-item">
+                            <input type="checkbox" name="features" value="{{ col }}" id="feature-{{ loop.index }}">
+                            <label for="feature-{{ loop.index }}">{{ col }}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <button type="submit" class="btn">
+                    <i class="fas fa-play"></i> Start Prediction
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="dashboard-container">
+            <p>&copy; 2024 CSV Analyzer Dashboard. Built with Flask and modern web technologies.</p>
+        </div>
+    </footer>
+</body>
+</html>

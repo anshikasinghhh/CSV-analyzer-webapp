@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data View - CSV Analyzer</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <h1><i class="fas fa-chart-line"></i> CSV Analyzer</h1>
+            <nav>
+                <ul>
+                    <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="/data" class="active"><i class="fas fa-table"></i> Data</a></li>
+                    <li><a href="/visualize"><i class="fas fa-chart-bar"></i> Visualize</a></li>
+                    <li><a href="/predict"><i class="fas fa-brain"></i> Predict</a></li>
+                    <li><a href="/download"><i class="fas fa-download"></i> Download</a></li>
+                </ul>
+            </nav>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <div class="card">
+            <h2><i class="fas fa-table"></i> Data Table</h2>
+            <div class="table-container">
+                {{ data|safe }}
+            </div>
+        </div>
+
+        <div class="card">
+            <h2><i class="fas fa-chart-pie"></i> Summary Statistics</h2>
+            <div class="table-container">
+                {{ stats|safe }}
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="dashboard-container">
+            <p>&copy; 2024 CSV Analyzer Dashboard. Built with Flask and modern web technologies.</p>
+        </div>
+    </footer>
+</body>
+</html>
